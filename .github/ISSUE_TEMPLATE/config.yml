@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题
+    url: https://github.com/JunyuZhan/MemoSpaceMac/security/advisories/new
+    about: 请勿公开报告安全漏洞，使用私密渠道
+  - name: 使用问题
+    url: https://github.com/JunyuZhan/MemoSpaceMac/discussions
+    about: 一般使用与配置问题请前往 Discussions

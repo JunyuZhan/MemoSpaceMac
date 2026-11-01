@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+*.swift text
+*.md text
+*.yml text
+*.yaml text
+*.json text
+Package.resolved text
+
+*.xcodeproj -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.icns binary

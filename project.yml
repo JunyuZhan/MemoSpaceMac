@@ -1,0 +1,38 @@
+name: MemoSpaceMac
+options:
+  bundleIdPrefix: com.local
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+packages:
+  MemoSpaceKit:
+    path: .
+targets:
+  MemoSpaceMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+    dependencies:
+      - package: MemoSpaceKit
+        product: MemoSpaceKit
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: 华为家庭存储
+        LSApplicationCategoryType: public.app-category.productivity
+        NSHumanReadableCopyright: ""
+        NSLocalNetworkUsageDescription: 需要访问局域网以发现并连接华为家庭存储设备。
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.memospacemac
+        PRODUCT_NAME: MemoSpaceMac
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        ENABLE_HARDENED_RUNTIME: NO
+        ENABLE_APP_SANDBOX: NO
+        COMBINE_HIDPI_IMAGES: YES

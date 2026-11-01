@@ -1,0 +1,14 @@
+.build/
+.swiftpm/
+DerivedData/
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+.DS_Store
+
+# Internal design notes (not published)
+docs/superpowers/
+
+.env
+.env.*
+!.env.example
