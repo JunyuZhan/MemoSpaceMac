@@ -52,6 +52,9 @@ final class AppModel: ObservableObject {
     @Published var sortOrder: ItemSortOrder = .ascending
     @Published var searchText: String = ""
     @Published var viewMode: ViewMode = .grid
+    @Published var showHiddenFiles = UserDefaults.standard.bool(forKey: "showHiddenFiles") {
+        didSet { UserDefaults.standard.set(showHiddenFiles, forKey: "showHiddenFiles") }
+    }
     @Published var errorMessage: String?
     @Published var pendingConflict: ConflictRequest?
     @Published var conflictPolicy: ConflictPolicy = .ask
@@ -114,9 +117,12 @@ final class AppModel: ObservableObject {
     }
 
     var visibleItems: [RemoteItem] {
-        let filtered = searchText.isEmpty
+        var filtered = showHiddenFiles
             ? items
-            : items.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            : items.filter { !FileVisibility.isSystemHidden($0.name) }
+        if !searchText.isEmpty {
+            filtered = filtered.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
         return ItemSorter.sorted(filtered, by: sortKey, order: sortOrder)
     }
 

@@ -17,6 +17,13 @@ struct SettingsView: View {
                 LabeledContent("下载目录", value: model.downloadDirectory.path)
             }
 
+            Section("浏览") {
+                Toggle("显示隐藏文件", isOn: $model.showHiddenFiles)
+                Text("关闭时会隐藏以 . 开头的文件，以及 Thumbs.db、desktop.ini。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Section("缓存") {
                 LabeledContent("预览缓存",
                                value: ByteCountFormatter.string(fromByteCount: downloadBytes,
