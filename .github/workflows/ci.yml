@@ -32,13 +32,19 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Build .app bundle (no Xcode)
+        run: make app
+
+      - name: Verify ad-hoc signature
+        run: codesign --verify --deep --strict --verbose=1 dist/MemoSpaceMac.app
+
       - name: Install XcodeGen
         run: brew install xcodegen
 
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build app
+      - name: Build app with xcodebuild
         run: |
           xcodebuild \
             -project MemoSpaceMac.xcodeproj \

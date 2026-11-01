@@ -33,7 +33,16 @@
 
 ## 构建
 
-需要 Xcode（Swift 6 工具链）与 [XcodeGen](https://github.com/yonaskolb/XcodeGen)：
+只需要 Command Line Tools（Swift 6），**无需安装 Xcode**：
+
+```bash
+make app   # 生成 dist/MemoSpaceMac.app（ad-hoc 签名）
+make run   # 构建并启动
+```
+
+`make app` 会先 `swift build -c release`，再用 `swiftc` 链接 App 与 AMSMB2 动态库，最后 ad-hoc 签名。
+
+可选：使用 Xcode 开发（需要 Xcode + [XcodeGen](https://github.com/yonaskolb/XcodeGen)）：
 
 ```bash
 brew install xcodegen
@@ -41,7 +50,7 @@ xcodegen generate
 open MemoSpaceMac.xcodeproj
 ```
 
-在 Xcode 中选择本地开发签名（ad-hoc 或 Apple Development）后运行。App 非沙盒。
+App 非沙盒；本地运行使用 ad-hoc 签名即可。
 
 只编译和测试核心库：
 
@@ -53,9 +62,10 @@ swift build -c release
 ## 使用
 
 1. 在华为家庭存储 App 中开启「网络邻居」共享。
-2. 启动 MemoSpaceMac，等待自动发现，或手动填写设备 IP。
-3. 共享名默认 `家庭共享`，按需切换到 `个人共享`。
-4. 游客登录无需密码；需要权限时填写设备上配置的账号。
+2. 启动 MemoSpaceMac，首次运行需允许「本地网络」访问。
+3. 等待自动发现，或手动填写设备 IP。
+4. 共享名默认 `家庭共享`，也可切换到账号对应的个人共享。
+5. 游客模式可发现共享列表；访问文件需填写设备上配置的账号与密码。
 
 ## 排障
 
@@ -106,6 +116,7 @@ swift build -c release
 - `Sources/MemoSpaceKit/`：模型、SMB 传输、设备发现、缓存、传输队列（无 UI，可单测）
 - `Tests/MemoSpaceKitTests/`：Swift Testing 单元测试
 - `App/`：SwiftUI 界面与 `AppModel`
+- `scripts/build-app.sh`：无 Xcode 构建 `.app`（产物在 `dist/`）
 - `project.yml`：XcodeGen 工程定义
 
 提交前请确保 `swift test` 全绿。详见 [CONTRIBUTING.md](CONTRIBUTING.md)。

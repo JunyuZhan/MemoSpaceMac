@@ -13,18 +13,14 @@ targets:
     platform: macOS
     sources:
       - path: App
+        excludes:
+          - Info.plist
     dependencies:
       - package: MemoSpaceKit
         product: MemoSpaceKit
-    info:
-      path: App/Info.plist
-      properties:
-        CFBundleDisplayName: 华为家庭存储
-        LSApplicationCategoryType: public.app-category.productivity
-        NSHumanReadableCopyright: ""
-        NSLocalNetworkUsageDescription: 需要访问局域网以发现并连接华为家庭存储设备。
     settings:
       base:
+        INFOPLIST_FILE: App/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.local.memospacemac
         PRODUCT_NAME: MemoSpaceMac
         MARKETING_VERSION: "0.1.0"
